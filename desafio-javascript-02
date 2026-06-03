@@ -1,40 +1,29 @@
 /*
 =========================================
-Desafio 02 - Produtos Financeiros Digitais
+Desafio 02 - Boas-vindas Bankly
 Santander Bootcamp React
 =========================================
 
 Descrição:
-Receber um código de produto financeiro e retornar o nome
-correspondente.
+Receber o nome do usuário e o saldo da conta em centavos.
+Exibir uma mensagem de boas-vindas com o saldo formatado
+em reais, utilizando duas casas decimais e vírgula como
+separador decimal.
 
-Produtos disponíveis:
-CC  -> Cartao de Credito
-EMP -> Emprestimo
-CD  -> Conta Digital
-
-Caso o código informado não exista,
-deve ser exibida a mensagem:
-"Produto desconhecido"
+Exemplos:
+Lucas 12345 -> Bem-vindo, Lucas! Seu saldo é R$123,45
+Maria 0     -> Bem-vindo, Maria! Seu saldo é R$0,00
 */
 
-// Lê o código informado pelo usuário
-const codigoProduto = gets();
+// Lê a entrada
+const entrada = gets().split(" ");
 
-// Verifica qual produto corresponde ao código
-switch (codigoProduto) {
-  case "CC":
-    print("Cartao de Credito");
-    break;
+// Obtém nome e saldo
+const nome = entrada[0];
+const saldoCentavos = parseInt(entrada[1]);
 
-  case "EMP":
-    print("Emprestimo");
-    break;
+// Converte centavos para reais
+const saldoReais = (saldoCentavos / 100).toFixed(2).replace(".", ",");
 
-  case "CD":
-    print("Conta Digital");
-    break;
-
-  default:
-    print("Produto desconhecido");
-}
+// Exibe a mensagem formatada
+print(`Bem-vindo, ${nome}! Seu saldo é R$${saldoReais}`);
