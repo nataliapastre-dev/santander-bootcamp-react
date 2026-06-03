@@ -1,0 +1,40 @@
+/*
+=========================================
+Desafio 01 - Produtos Financeiros Digitais
+Santander Bootcamp React
+=========================================
+
+Descrição:
+Receber um código de produto financeiro e retornar o nome
+correspondente.
+
+Produtos disponíveis:
+CC  -> Cartao de Credito
+EMP -> Emprestimo
+CD  -> Conta Digital
+
+Caso o código informado não exista,
+deve ser exibida a mensagem:
+"Produto desconhecido"
+*/
+
+// Lê o código informado pelo usuário
+const codigoProduto = gets();
+
+// Verifica qual produto corresponde ao código
+switch (codigoProduto) {
+  case "CC":
+    print("Cartao de Credito");
+    break;
+
+  case "EMP":
+    print("Emprestimo");
+    break;
+
+  case "CD":
+    print("Conta Digital");
+    break;
+
+  default:
+    print("Produto desconhecido");
+}
