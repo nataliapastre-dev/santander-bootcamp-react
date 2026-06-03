@@ -9,21 +9,14 @@ Receber o nome do usuário e o saldo da conta em centavos.
 Exibir uma mensagem de boas-vindas com o saldo formatado
 em reais, utilizando duas casas decimais e vírgula como
 separador decimal.
-
-Exemplos:
-Lucas 12345 -> Bem-vindo, Lucas! Seu saldo é R$123,45
-Maria 0     -> Bem-vindo, Maria! Seu saldo é R$0,00
 */
 
-// Lê a entrada
-const entrada = gets().split(" ");
+const entrada = gets();
 
-// Obtém nome e saldo
-const nome = entrada[0];
-const saldoCentavos = parseInt(entrada[1]);
+const [nome, saldoCentavos] = entrada.split(" ");
 
-// Converte centavos para reais
-const saldoReais = (saldoCentavos / 100).toFixed(2).replace(".", ",");
+const saldoReais = (Number(saldoCentavos) / 100)
+  .toFixed(2)
+  .replace(".", ",");
 
-// Exibe a mensagem formatada
 print(`Bem-vindo, ${nome}! Seu saldo é R$${saldoReais}`);
