@@ -1,1 +1,44 @@
 
+/*
+Desafio 01 - Produtos Financeiros Digitais
+Santander Bootcamp React
+
+Descrição:
+Receber um código de produto financeiro e retornar o nome
+correspondente ou "Produto desconhecido" caso o código não exista.
+
+Exemplos:
+
+Entrada: CC
+Saída: Cartao de Credito
+
+Entrada: EMP
+Saída: Emprestimo
+
+Entrada: CD
+Saída: Conta Digital
+
+Entrada: XYZ
+Saída: Produto desconhecido
+*/
+
+// IMPORTANTE: As funções "gets" e "print" são acessíveis globalmente e têm as seguintes funcionalidades:
+// - "gets": lê UMA linha com dados de entrada (inputs) do usuário;
+// - "print": imprime um texto de saída (output) e pula uma linha ("\n") automaticamente.
+
+// Mapeamento dos códigos para os nomes dos produtos financeiros digitais
+const produtos = {
+    "CC": "Cartao de Credito",
+    "CD": "Conta Digital",
+    "EMP": "Emprestimo",
+    "INV": "Investimento"
+};
+
+// Lê o código do produto digitado pelo usuário
+const codigo = gets();
+
+// Busca o produto correspondente ou retorna um valor padrão
+const nomeProduto = produtos[codigo] || "Produto desconhecido";
+
+// Exibe o resultado
+print(nomeProduto);
