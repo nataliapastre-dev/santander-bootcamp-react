@@ -1,1 +1,65 @@
+import os
+import random
+from google import genai
+from google.genai import types
 
+# 1. Inicializa o cliente da API do Gemini
+# Certifique-se de ter a variável de ambiente GEMINI_API_KEY configurada
+client = genai.Client()
+
+# 2. Define a ferramenta (Tool) que o agente poderá usar
+def verificar_status_servidor(ambiente: str) -> str:
+    """
+    Verifica o status atual de um servidor específico.
+    Args:
+        ambiente: O nome do ambiente (ex: 'produção', 'homologação')
+    """
+    # Aqui simulamos uma checagem real de API ou banco de dados
+    status_opcoes = ["OPERANTE (100% Online)", "LENTIDÃO DETECTADA", "FORA DO AR (Manutenção)"]
+    status_atual = random.choice(status_opcoes)
+    return f"O servidor de {ambiente} está atualmente: {status_atual}."
+
+def criar_agente():
+    print("🤖 Agente de IA Inicializado. Faça uma pergunta (ou digite 'sair'):\n")
+    
+    # Instrução de sistema para moldar o comportamento do agente
+    system_instruction = (
+        "Você é um Agente de Suporte Técnico Inteligente. "
+        "Você tem acesso a ferramentas para checar o status de servidores. "
+        "Sempre use as ferramentas disponíveis quando o usuário perguntar sobre a situação do sistema."
+    )
+
+    while True:
+        user_input = input("👤 Você: ")
+        if user_input.lower() == 'sair':
+            print("Até logo! 🚀")
+            break
+            
+        if not user_input.strip():
+            continue
+
+        try:
+            # O agente recebe a pergunta e a lista de funções que ele pode decidir usar
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=user_input,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction,
+                    # Passamos a função diretamente como ferramenta
+                    tools=[verificar_status_servidor],
+                    temperature=0.3
+                )
+            )
+            
+            print(f"🤖 Agente: {response.text}\n")
+            
+        except Exception as e:
+            print(f"❌ Erro ao processar requisição: {e}\n")
+
+if __name__ == "__main__":
+    # Garante que a chave de API está presente antes de rodar
+    if "GEMINI_API_KEY" not in os.environ:
+        print("⚠️ Erro: A variável de ambiente GEMINI_API_KEY não foi encontrada.")
+        print("Configure-a usando: export GEMINI_API_KEY='sua_chave_aqui'")
+    else:
+        criar_agente()
